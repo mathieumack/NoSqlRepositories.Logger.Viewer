@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoSqlRepositories.Logger.Viewer.Core", "NoSqlRepositories.Logger.Viewer.Core\NoSqlRepositories.Logger.Viewer.Core.csproj", "{67F9D3A8-F71E-4428-913F-C37AE82CDB24}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoSqlRepositories.Logger.Viewer.Client.Wpf", "NoSqlRepositories.Logger.Viewer.Client.Wpf\NoSqlRepositories.Logger.Viewer.Client.Wpf.csproj", "{86124666-0558-4562-9F1C-86BB34D31F39}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoSqlRepositories.Logger.Viewer.Services", "NoSqlRepositories.Logger.Viewer.Services\NoSqlRepositories.Logger.Viewer.Services.csproj", "{B13A5CEC-A1E2-47A1-B289-ACDF7CC17F79}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Librairies", "Librairies", "{C95F9608-0103-42AF-8052-56B956606CC5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{0303ED03-268A-4AC2-A58D-C8F2A11F5A16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoSqlRepositories.Logger.Viewer.ViewModels", "NoSqlRepositories.Logger.Viewer.ViewModels\NoSqlRepositories.Logger.Viewer.ViewModels.csproj", "{7D0ECB21-26AC-47D3-AF42-37547382D8ED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{67F9D3A8-F71E-4428-913F-C37AE82CDB24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67F9D3A8-F71E-4428-913F-C37AE82CDB24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67F9D3A8-F71E-4428-913F-C37AE82CDB24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67F9D3A8-F71E-4428-913F-C37AE82CDB24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86124666-0558-4562-9F1C-86BB34D31F39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86124666-0558-4562-9F1C-86BB34D31F39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86124666-0558-4562-9F1C-86BB34D31F39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86124666-0558-4562-9F1C-86BB34D31F39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B13A5CEC-A1E2-47A1-B289-ACDF7CC17F79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B13A5CEC-A1E2-47A1-B289-ACDF7CC17F79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B13A5CEC-A1E2-47A1-B289-ACDF7CC17F79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B13A5CEC-A1E2-47A1-B289-ACDF7CC17F79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D0ECB21-26AC-47D3-AF42-37547382D8ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D0ECB21-26AC-47D3-AF42-37547382D8ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D0ECB21-26AC-47D3-AF42-37547382D8ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D0ECB21-26AC-47D3-AF42-37547382D8ED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{67F9D3A8-F71E-4428-913F-C37AE82CDB24} = {C95F9608-0103-42AF-8052-56B956606CC5}
+		{86124666-0558-4562-9F1C-86BB34D31F39} = {0303ED03-268A-4AC2-A58D-C8F2A11F5A16}
+		{B13A5CEC-A1E2-47A1-B289-ACDF7CC17F79} = {C95F9608-0103-42AF-8052-56B956606CC5}
+		{7D0ECB21-26AC-47D3-AF42-37547382D8ED} = {C95F9608-0103-42AF-8052-56B956606CC5}
+	EndGlobalSection
+EndGlobal

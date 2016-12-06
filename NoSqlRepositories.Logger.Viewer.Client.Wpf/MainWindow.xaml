@@ -1,0 +1,31 @@
+﻿<Controls:MetroWindow x:Class="NoSqlRepositories.Logger.Viewer.Client.Wpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NoSqlRepositories.Logger.Viewer.Client.Wpf"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        mc:Ignorable="d"
+        Title="NoSqlRepositories Logger Viewer" Height="350" Width="525">
+    <Controls:MetroWindow.Flyouts>
+        <Controls:FlyoutsControl>
+            <Controls:Flyout Header="Connection" Name="Connection" Position="Right" Width="200">
+            </Controls:Flyout>
+        </Controls:FlyoutsControl>
+    </Controls:MetroWindow.Flyouts>
+    <Grid x:Name="Main">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" x:Name="FiltersBar" Background="White"></Grid>
+            <Grid Grid.Row="1" x:Name="LeftPanel" Background="White"></Grid>
+        </Grid>
+        <Grid Grid.Column="1" x:Name="RightPanel" Background="White"></Grid>
+    </Grid>
+</Controls:MetroWindow>
