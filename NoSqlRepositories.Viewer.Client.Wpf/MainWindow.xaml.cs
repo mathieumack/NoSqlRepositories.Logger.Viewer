@@ -1,13 +1,14 @@
 ﻿using System.Windows;
 using NoSqlRepositories.Viewer.Client.Wpf.Views;
 using System.Windows.Controls;
+using MahApps.Metro.Controls;
 
 namespace NoSqlRepositories.Viewer.Client.Wpf
 {
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     {
         public MainWindow()
         {
@@ -23,15 +24,20 @@ namespace NoSqlRepositories.Viewer.Client.Wpf
         {
             switch (regionName)
             {
-                case "LogList":
+                case "LeftPanel":
                     DataContext = frameworkElement.DataContext;
                     LeftPanel.Children.Clear();
                     LeftPanel.Children.Add(frameworkElement);
                     break;
-                case "LogDetail":
+                case "RightPanel":
                     DataContext = frameworkElement.DataContext;
                     RightPanel.Children.Clear();
                     RightPanel.Children.Add(frameworkElement);
+                    break;
+                case "Navbar":
+                    DataContext = frameworkElement.DataContext;
+                    Navbar.Children.Clear();
+                    Navbar.Children.Add(frameworkElement);
                     break;
                 default:
                     //DataContext = frameworkElement.DataContext;

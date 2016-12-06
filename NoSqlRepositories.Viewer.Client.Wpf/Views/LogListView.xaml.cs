@@ -7,7 +7,7 @@ namespace NoSqlRepositories.Viewer.Client.Wpf.Views
     /// <summary>
     /// Logique d'interaction pour LogListView.xaml
     /// </summary>
-    [Region("LogList")]
+    [Region("LeftPanel")]
     public partial class LogListView : MvxWpfView
     {
         public LogListView()

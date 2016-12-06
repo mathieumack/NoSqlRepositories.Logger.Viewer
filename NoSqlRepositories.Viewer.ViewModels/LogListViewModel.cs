@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NoSqlLogReader.ViewModels.Messenger;
+using System.Collections.ObjectModel;
 
 namespace NoSqlRepositories.Viewer.ViewModels
 {
@@ -20,7 +22,15 @@ namespace NoSqlRepositories.Viewer.ViewModels
         /// <summary>
         /// Liste des logs sous forme d'item
         /// </summary>
-        private List<LogListItemViewModel> logList;
+        //private List<LogListItemViewModel> logList;
+
+        private readonly ILogFetcher fetcher;
+
+        private readonly IMvxFileStore fileStore;
+
+        private readonly IMvxMessenger messenger;
+
+        private readonly MvxSubscriptionToken messengerToken;
 
         #endregion
 
@@ -29,17 +39,12 @@ namespace NoSqlRepositories.Viewer.ViewModels
         /// <summary>
         /// Liste des logs sous forme d'item
         /// </summary>
-        public List<LogListItemViewModel> LogList
+        public ObservableCollection<LogListItemViewModel> LogList
         {
             get
-            {
-                return logList;
-            }
+            ;
             set
-            {
-                logList = value;
-                RaisePropertyChanged(() => LogList);
-            }
+           ;
         }
 
         public LogListItemViewModel SelectedItem
@@ -58,15 +63,28 @@ namespace NoSqlRepositories.Viewer.ViewModels
                                 IMvxFileStore fileStore,
                                 IMvxMessenger messenger)
         {
-            logList = new List<LogListItemViewModel>();
+            messengerToken = Mvx.Resolve<IMvxMessenger>().Subscribe<UpdateLogListMessage>(UpdateLogs);
+            this.fetcher = fetcher;
+            this.fileStore = fileStore;
+            this.messenger = messenger;
+            LogList = new ObservableCollection<LogListItemViewModel>();
+            UpdateLogs();
+        }
+        
+        public void UpdateLogs(UpdateLogListMessage sender = null)
+        {
             IList<Log> logs = fetcher.GetLogs(fileStore);
-            foreach(Log log in logs)
+            LogList.Clear();
+            foreach (Log log in logs)
             {
-                logList.Add(new LogListItemViewModel(messenger, log));
+                LogList.Add(new LogListItemViewModel(messenger, log));
             }
-            SelectedItem = new LogListItemViewModel(messenger, logs.First());
+            if (logs.Count > 0)
+                SelectedItem = new LogListItemViewModel(messenger, logs.First());
         }
 
         #endregion
+
+
     }
 }

@@ -36,10 +36,12 @@
   <ItemGroup>
     <Compile Include="App.cs" />
     <Compile Include="LogDetailViewModel.cs" />
+    <Compile Include="LogFilterViewModel.cs" />
     <Compile Include="LogListItemViewModel.cs" />
     <Compile Include="LogListViewModel.cs" />
     <Compile Include="MainViewModel.cs" />
     <Compile Include="Messenger\LogMessage.cs" />
+    <Compile Include="Messenger\UpdateLogListMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -75,6 +77,10 @@
       <HintPath>..\packages\MvvX.Plugins.AssemblyFinder.0.4.0.21718-pre\lib\portable-net45+sl5+wp8+wpa81+win8+monoandroid+monotouch\MvvX.Plugins.AssemblyFinder.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="NoSqlRepositories.Core, Version=1.16.41.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NoSqlRepositories.Core.1.16.41.0\lib\portable-net45+sl5+wp8+wpa81+win8+monoandroid+monotouch\NoSqlRepositories.Core.dll</HintPath>
       <Private>True</Private>
@@ -92,9 +98,9 @@
       <Project>{67f9d3a8-f71e-4428-913f-c37ae82cdb24}</Project>
       <Name>NoSqlRepositories.Viewer.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NoSqlRepositories.Viewer.Services\NoSqlLogReader.Services.csproj">
+    <ProjectReference Include="..\NoSqlRepositories.Viewer.Services\NoSqlRepositories.Viewer.Services.csproj">
       <Project>{b13a5cec-a1e2-47a1-b289-acdf7cc17f79}</Project>
-      <Name>NoSqlLogReader.Services</Name>
+      <Name>NoSqlRepositories.Viewer.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

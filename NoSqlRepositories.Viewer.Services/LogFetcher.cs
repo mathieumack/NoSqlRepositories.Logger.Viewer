@@ -5,6 +5,7 @@ using MvvmCross.Platform;
 using NoSqlRepositories.Viewer.Services;
 using System.Linq;
 using NoSqlRepositories.MvvX.JsonFiles.Pcl;
+using System.Collections;
 
 namespace NoSqlRepositories.Viewer.Core.Services
 {
@@ -14,10 +15,12 @@ namespace NoSqlRepositories.Viewer.Core.Services
 
         private IList<Log> logs;
 
+        private List<LogLevel> filter;
 
         public LogFetcher()
         {
             logs = new List<Log>();
+            filter = new List<LogLevel>();
         }
 
         /// <summary>
@@ -26,7 +29,7 @@ namespace NoSqlRepositories.Viewer.Core.Services
         public IList<Log> GetLogs(IMvxFileStore fileStore)
         {
             JsonFileRepository<Log> repo = new JsonFileRepository<Log>(fileStore, "Logs");
-            this.logs = repo.GetAll();
+            this.logs = repo.GetAll().Where(log => !filter.Any(filter => filter == log.Level)).ToList();
             return this.logs;
         }
 
@@ -39,5 +42,18 @@ namespace NoSqlRepositories.Viewer.Core.Services
             Log result = this.logs.Where(log => log.Id == queryId).First();
             return result;
         }
+
+        public void AddFilter(LogLevel filterSpec)
+        {
+            if (!this.filter.Contains(filterSpec))
+                this.filter.Add(filterSpec);
+        }
+
+        public void RemoveFilter(LogLevel filterSpec)
+        {
+            if (this.filter.Contains(filterSpec))
+                this.filter.Remove(filterSpec);
+        }
+
     }
 }

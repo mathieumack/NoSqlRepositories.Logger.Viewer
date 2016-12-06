@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoSqlRepositories.Viewer.Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoSqlRepositories.Viewer.Client.Wpf", "NoSqlRepositories.Viewer.Client.Wpf\NoSqlRepositories.Viewer.Client.Wpf.csproj", "{86124666-0558-4562-9F1C-86BB34D31F39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoSqlLogReader.Services", "NoSqlRepositories.Viewer.Services\NoSqlLogReader.Services.csproj", "{B13A5CEC-A1E2-47A1-B289-ACDF7CC17F79}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoSqlRepositories.Viewer.Services", "NoSqlRepositories.Viewer.Services\NoSqlRepositories.Viewer.Services.csproj", "{B13A5CEC-A1E2-47A1-B289-ACDF7CC17F79}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Librairies", "Librairies", "{C95F9608-0103-42AF-8052-56B956606CC5}"
 EndProject

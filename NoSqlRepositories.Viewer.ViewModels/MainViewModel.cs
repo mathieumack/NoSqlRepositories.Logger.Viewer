@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NoSqlLogReader.ViewModels;
 
 namespace NoSqlRepositories.Viewer.ViewModels
 {
@@ -81,6 +82,7 @@ namespace NoSqlRepositories.Viewer.ViewModels
         {
             ShowViewModel<LogListViewModel>();
             ShowViewModel<LogDetailViewModel>();
+            ShowViewModel<LogFilterViewModel>();
         }
 
         #endregion

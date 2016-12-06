@@ -8,6 +8,8 @@ using NoSqlRepositories.Logger;
 using System;
 using System.Collections;
 using System.Reflection;
+using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 
 namespace NoSqlRepositories.Viewer.ViewModels
 {
@@ -149,26 +151,59 @@ namespace NoSqlRepositories.Viewer.ViewModels
         private string FormatLogObject(object o)
         {
             string message = "";
-            Type objectType = o.GetType();
-            if(objectType.Namespace.StartsWith("System"))
+            if (!IsIterable(o))
             {
-                // Object générique
-                return o.ToString();
-            } else
-            {
-                // Objet non générique -> On itère sur les propriétés
-                foreach(PropertyInfo prop in objectType.GetProperties())
+                Type objectType = o.GetType();
+                if (objectType.GetTypeInfo().IsGenericType || objectType.Namespace.StartsWith("System"))
                 {
-                    if (prop.CanRead)
+                    // Object générique
+                    return o.ToString();
+                }
+                else
+                {
+                    // Objet non générique -> On itère sur les propriétés
+                    foreach (PropertyInfo prop in objectType.GetProperties())
                     {
-                        object oValue = prop.GetValue(o);
-                        message += prop.Name+" : "+oValue.ToString()+"\n";
+                        if (prop.CanRead)
+                        {
+                            object oValue = prop.GetValue(o);
+                            message += prop.Name + " : " + oValue.ToString() + "\n";
+                        }
                     }
                 }
+            }
+            else
+            {
+                var enumerable = o as System.Collections.IEnumerable;
+                message += "[ ";
+                foreach(var item in enumerable)
+                {
+                    message += item.ToString() + " ";
+                }
+                message += "]";
             }
             return message;
         }
 
+
+        private bool IsList(object o)
+        {
+            return o is IList &&
+               o.GetType().GetTypeInfo().IsGenericType &&
+               o.GetType().GetGenericTypeDefinition().IsAssignableFrom(typeof(List<>));
+        }
+
+        private bool IsDictionary(object o)
+        {
+            return o is IDictionary &&
+               o.GetType().GetTypeInfo().IsGenericType &&
+               o.GetType().GetGenericTypeDefinition().IsAssignableFrom(typeof(Dictionary<,>));
+        }
+
+        private bool IsIterable(object o)
+        {
+            return IsDictionary(o) || IsList(o) || o is JArray;
+        }
         #endregion
     }
 }

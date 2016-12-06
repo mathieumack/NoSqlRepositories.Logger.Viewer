@@ -13,5 +13,9 @@ namespace NoSqlRepositories.Viewer.Services
         IList<Log> GetLogs(IMvxFileStore fileStore);
 
         Log GetLogById(IMvxFileStore fileStore, string selectedLog);
+
+        void AddFilter(LogLevel filterSpec);
+
+        void RemoveFilter(LogLevel filterSpec);
     }
 }

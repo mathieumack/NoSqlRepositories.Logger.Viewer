@@ -139,6 +139,9 @@
     <Compile Include="Views\LogDetailView.xaml.cs">
       <DependentUpon>LogDetailView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\LogFilterView.xaml.cs">
+      <DependentUpon>LogFilterView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LogListView.xaml.cs">
       <DependentUpon>LogListView.xaml</DependentUpon>
     </Compile>
@@ -160,6 +163,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\LogDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LogFilterView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -207,9 +214,9 @@
       <Project>{67f9d3a8-f71e-4428-913f-c37ae82cdb24}</Project>
       <Name>NoSqlRepositories.Viewer.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NoSqlRepositories.Viewer.Services\NoSqlLogReader.Services.csproj">
+    <ProjectReference Include="..\NoSqlRepositories.Viewer.Services\NoSqlRepositories.Viewer.Services.csproj">
       <Project>{b13a5cec-a1e2-47a1-b289-acdf7cc17f79}</Project>
-      <Name>NoSqlLogReader.Services</Name>
+      <Name>NoSqlRepositories.Viewer.Services</Name>
     </ProjectReference>
     <ProjectReference Include="..\NoSqlRepositories.Viewer.ViewModels\NoSqlRepositories.Viewer.ViewModels.csproj">
       <Project>{7d0ecb21-26ac-47d3-af42-37547382d8ed}</Project>
