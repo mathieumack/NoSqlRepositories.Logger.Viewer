@@ -5,18 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NoSqlRepositories.Logger.Viewer.Client.Wpf"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="NoSqlRepositories Logger Viewer" Height="350" Width="525">
+        Title="NoSqlRepositories Logger Viewer" Height="600" Width="800">
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <StackPanel Orientation="Horizontal">
+                <ToggleButton IsChecked="{Binding ElementName=ConnectionFlyout, Path=IsOpen}" Cursor="Hand">
+                    <StackPanel Orientation="Horizontal">
+                        <iconPacks:PackIconModern Kind="Connect" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <TextBlock Margin="4 0 0 0"
+                           VerticalAlignment="Center"
+                           Text="Connect" />
+                    </StackPanel>
+                </ToggleButton>
+            </StackPanel>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
     <Controls:MetroWindow.Flyouts>
         <Controls:FlyoutsControl>
-            <Controls:Flyout Header="Connection" Name="Connection" Position="Right" Width="200">
+            <Controls:Flyout Header="Connection" Name="ConnectionFlyout" Position="Right" Width="300">
+                <Grid Name="Connection"></Grid>
             </Controls:Flyout>
         </Controls:FlyoutsControl>
     </Controls:MetroWindow.Flyouts>
     <Grid x:Name="Main">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"></ColumnDefinition>
-            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="250"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>

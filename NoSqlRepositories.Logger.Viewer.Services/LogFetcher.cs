@@ -7,7 +7,6 @@ namespace NoSqlRepositories.Logger.Viewer.Core.Services
 {
     public class LogFetcher : ILogFetcher
     {
-        private readonly string jsonPath = "C:\\Sources\\FirstNoSqlRepositories.Logger.Viewer\\NoSqlRepositories.Logger.Viewer\\NoSqlRepositories.Logger.Viewer\\";
 
         private INoSQLRepository<Log> repo;
         
@@ -27,6 +26,11 @@ namespace NoSqlRepositories.Logger.Viewer.Core.Services
         public Log GetLogById(string id)
         {
             return repo.GetById(id);
+        }
+
+        public bool IsLoaded()
+        {
+            return (this.repo != null);
         }
     }
 }

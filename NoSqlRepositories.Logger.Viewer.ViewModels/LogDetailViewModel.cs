@@ -10,6 +10,7 @@ using System.Collections;
 using System.Reflection;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace NoSqlRepositories.Logger.Viewer.ViewModels
 {
@@ -136,18 +137,23 @@ namespace NoSqlRepositories.Logger.Viewer.ViewModels
         /// <param name="logMessage"></param>
         private void UpdateData(LogMessage logMessage)
         {
-            Log selectedLog = fetcher.GetLogById(this.fileStore, logMessage.SelectedLog);
+            if(logMessage.SelectedLog != null)
+            {
+                Log selectedLog = fetcher.GetLogById(logMessage.SelectedLog);
+                this.Message = selectedLog.Message;
+                this.LongMessage = selectedLog.LongMessage;
+                this.Level = selectedLog.Level;
+                this.ContentLog = JValue.Parse(selectedLog.ContentLog).ToString(Formatting.Indented);
+            }
 
-            this.Message = selectedLog.Message;
-            this.LongMessage = selectedLog.LongMessage;
-            this.Level = selectedLog.Level;
-            this.ContentLog = FormatLogObject(selectedLog.ContentLog);
+           
         }
 
         #endregion
 
         #region Private Methods
 
+        /*
         private string FormatLogObject(object o)
         {
             string message = "";
@@ -204,6 +210,7 @@ namespace NoSqlRepositories.Logger.Viewer.ViewModels
         {
             return IsDictionary(o) || IsList(o) || o is JArray;
         }
+        */
         #endregion
     }
 }

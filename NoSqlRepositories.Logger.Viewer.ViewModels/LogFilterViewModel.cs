@@ -87,35 +87,24 @@ namespace NoSqlLogReader.ViewModels
         {
             this.fetcher = fetcher;
             this.messenger = messenger;
-            InfoFiltered = false;
-            WarningFiltered = false;
-            ErrorFiltered = false;
-            CriticalFiltered = false;
+            infoFiltered = false;
+            warningFiltered = false;
+            errorFiltered = false;
+            criticalFiltered = false;
         }
         
         private void UpdateFilters()
         {
+            List<LogLevel> filters = new List<LogLevel>();
             if (InfoFiltered)
-                fetcher.AddFilter(LogLevel.Info);
-            else
-                fetcher.RemoveFilter(LogLevel.Info);
-
+                filters.Add(LogLevel.Info);
             if (WarningFiltered)
-                fetcher.AddFilter(LogLevel.Warning);
-            else
-                fetcher.RemoveFilter(LogLevel.Warning);
-
+                filters.Add(LogLevel.Warning);
             if (ErrorFiltered)
-                fetcher.AddFilter(LogLevel.Error);
-            else
-                fetcher.RemoveFilter(LogLevel.Error);
-
+                filters.Add(LogLevel.Error);
             if (CriticalFiltered)
-                fetcher.AddFilter(LogLevel.Critical);
-            else
-                fetcher.RemoveFilter(LogLevel.Critical);
-
-            Mvx.Resolve<IMvxMessenger>().Publish<UpdateLogListMessage>(new UpdateLogListMessage(this));
+                filters.Add(LogLevel.Critical);
+            Mvx.Resolve<IMvxMessenger>().Publish<UpdateLogListMessage>(new UpdateLogListMessage(this, filters));
         }
 
 

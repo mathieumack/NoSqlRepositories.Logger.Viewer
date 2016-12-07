@@ -103,8 +103,8 @@
       <HintPath>..\packages\NoSqlRepositories.Core.1.16.44.0\lib\portable-net45+sl5+wp8+wpa81+win8+monoandroid+monotouch\NoSqlRepositories.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NoSqlRepositories.Logger, Version=0.3.6.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NoSqlRepositories.Logger.0.3.6.0\lib\portable-net45+sl5+wp8+wpa81+win8+monoandroid+monotouch\NoSqlRepositories.Logger.dll</HintPath>
+    <Reference Include="NoSqlRepositories.Logger, Version=0.4.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NoSqlRepositories.Logger.0.4.7.0\lib\portable-net45+sl5+wp8+wpa81+win8+monoandroid+monotouch\NoSqlRepositories.Logger.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="NoSqlRepositories.MvvX.JsonFiles.Pcl, Version=1.16.44.0, Culture=neutral, processorArchitecture=MSIL">

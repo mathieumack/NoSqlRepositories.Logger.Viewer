@@ -78,16 +78,27 @@
       <HintPath>..\packages\MvvX.Plugins.AssemblyFinder.0.4.0.21718-pre\lib\portable-net45+sl5+wp8+wpa81+win8+monoandroid+monotouch\MvvX.Plugins.AssemblyFinder.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MvvX.Plugins.CouchBaseLite, Version=2.7.68.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvX.Plugins.CouchBaseLite.2.7.68.0\lib\portable-net45+sl5+wp8+wpa81+win8+monoandroid+monotouch\MvvX.Plugins.CouchBaseLite.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NoSqlRepositories.Core, Version=1.16.41.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NoSqlRepositories.Core.1.16.41.0\lib\portable-net45+sl5+wp8+wpa81+win8+monoandroid+monotouch\NoSqlRepositories.Core.dll</HintPath>
+    <Reference Include="NoSqlRepositories.Core, Version=1.16.44.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NoSqlRepositories.Core.1.16.44.0\lib\portable-net45+sl5+wp8+wpa81+win8+monoandroid+monotouch\NoSqlRepositories.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NoSqlRepositories.Logger, Version=0.3.6.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NoSqlRepositories.Logger.0.3.6.0\lib\portable-net45+sl5+wp8+wpa81+win8+monoandroid+monotouch\NoSqlRepositories.Logger.dll</HintPath>
+    <Reference Include="NoSqlRepositories.JsonFiles.Net">
+      <HintPath>..\..\..\FirstNoSqlLogReader\NoSqlLogReader\packages\NoSqlRepositories.JsonFiles.Net.1.16.44.0\lib\net45\NoSqlRepositories.JsonFiles.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NoSqlRepositories.Logger, Version=0.4.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NoSqlRepositories.Logger.0.4.7.0\lib\portable-net45+sl5+wp8+wpa81+win8+monoandroid+monotouch\NoSqlRepositories.Logger.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NoSqlRepositories.MvvX.CouchBaseLite.Pcl, Version=1.16.44.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NoSqlRepositories.MvvX.CouchBaseLite.Pcl.1.16.44.0\lib\portable-net45+sl5+wp8+wpa81+win8+monoandroid+monotouch\NoSqlRepositories.MvvX.CouchBaseLite.Pcl.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>

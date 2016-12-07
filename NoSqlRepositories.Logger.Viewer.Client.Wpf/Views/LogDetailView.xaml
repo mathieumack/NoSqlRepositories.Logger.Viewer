@@ -6,15 +6,17 @@
                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
                   xmlns:local="clr-namespace:NoSqlRepositories.Logger.Viewer.Client.Wpf.Views">
 
-    <StackPanel Margin="5">
-        <TextBlock Text="Detail :" Style="{StaticResource h1}" Margin="5"></TextBlock>
-        <TextBlock Text="Message :" Style="{StaticResource h3}" Margin="5"></TextBlock>
-        <TextBlock Text="{Binding Message}" Style="{StaticResource labelDetail}" Margin="14,0,0,0"></TextBlock>
-        <TextBlock Text="Long message :" Style="{StaticResource h3}" Margin="5"></TextBlock>
-        <TextBlock Text="{Binding LongMessage}" Style="{StaticResource labelDetail}" Margin="14,0,0,0"></TextBlock>
-        <TextBlock Text="Log level :" Style="{StaticResource h3}" Margin="5"></TextBlock>
-        <TextBlock Text="{Binding Level}" Style="{StaticResource labelDetail}" Margin="14,0,0,0"></TextBlock>
-        <TextBlock Text="Content :" Style="{StaticResource h3}" Margin="5"></TextBlock>
-        <TextBlock Text="{Binding ContentLog}" Style="{StaticResource labelDetail}" Margin="14,0,0,0"></TextBlock>
-    </StackPanel>
+    <ScrollViewer Margin="5">
+        <StackPanel>
+            <TextBlock Text="Detail :" Style="{StaticResource h1}" Margin="5"></TextBlock>
+            <TextBlock Text="Message :" Style="{StaticResource h3}" Margin="5"></TextBlock>
+            <TextBlock Text="{Binding Message}" Style="{StaticResource labelDetail}" Margin="14,0,0,0"></TextBlock>
+            <TextBlock Text="Long message :" Style="{StaticResource h3}" Margin="5"></TextBlock>
+            <TextBlock Text="{Binding LongMessage}" Style="{StaticResource labelDetail}" Margin="14,0,0,0"></TextBlock>
+            <TextBlock Text="Log level :" Style="{StaticResource h3}" Margin="5"></TextBlock>
+            <TextBlock Text="{Binding Level}" Style="{StaticResource labelDetail}" Margin="14,0,0,0"></TextBlock>
+            <TextBlock Text="Content :" Style="{StaticResource h3}" Margin="5"></TextBlock>
+            <TextBlock Text="{Binding ContentLog}" Style="{StaticResource labelDetail}" Margin="14,0,0,0" Focusable="True"></TextBlock>
+        </StackPanel>
+    </ScrollViewer>
 </views:MvxWpfView>

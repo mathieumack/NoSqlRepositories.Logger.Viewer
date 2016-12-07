@@ -18,22 +18,22 @@
             <StackPanel>
                 <TextBlock Text="Error levels:" Style="{StaticResource h3}" Margin="5"></TextBlock>
                 <WrapPanel Margin="5" Grid.Column="0">
-                    <ToggleButton IsChecked="{Binding InfoFiltered}" Focusable="False" Style="{StaticResource MetroCircleButtonStyle}" ToolTip="Info"
+                    <ToggleButton IsChecked="{Binding InfoFiltered}" Focusable="False" Style="{StaticResource MetroCircleToggleButtonStyle}" ToolTip="Info"
                                 Width="40"
                                 Height="40">
                         <iconPacks:PackIconModern Kind="Information" VerticalAlignment="Center" HorizontalAlignment="Center" />
                     </ToggleButton>
-                    <ToggleButton IsChecked="{Binding WarningFiltered}" Focusable="False" Style="{StaticResource MetroCircleButtonStyle}" ToolTip="Warning"
+                    <ToggleButton IsChecked="{Binding WarningFiltered}" Focusable="False" Style="{StaticResource MetroCircleToggleButtonStyle}" ToolTip="Warning"
                                 Width="40"
                                 Height="40">
                         <iconPacks:PackIconModern Kind="Flag" VerticalAlignment="Center" HorizontalAlignment="Center" />
                     </ToggleButton>
-                    <ToggleButton IsChecked="{Binding ErrorFiltered}" Focusable="False" Style="{StaticResource MetroCircleButtonStyle}" ToolTip="Error"
+                    <ToggleButton IsChecked="{Binding ErrorFiltered}" Focusable="False" Style="{StaticResource MetroCircleToggleButtonStyle}" ToolTip="Error"
                                 Width="40"
                                 Height="40">
                         <iconPacks:PackIconModern Kind="Warning" VerticalAlignment="Center" HorizontalAlignment="Center" />
                     </ToggleButton>
-                    <ToggleButton IsChecked="{Binding CriticalFiltered}" Style="{StaticResource MetroCircleButtonStyle}" ToolTip="Critical"
+                    <ToggleButton IsChecked="{Binding CriticalFiltered}" Style="{StaticResource MetroCircleToggleButtonStyle}" ToolTip="Critical"
                                 Width="40"
                                 Height="40">
                         <iconPacks:PackIconModern Kind="Bug" VerticalAlignment="Center" HorizontalAlignment="Center" />

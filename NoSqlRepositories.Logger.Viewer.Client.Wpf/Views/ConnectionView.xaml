@@ -6,9 +6,17 @@
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
                     xmlns:local="clr-namespace:NoSqlLogReader.UI.Wpf.Views"
                     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-                    mc:Ignorable="d" 
+                    xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                    mc:Ignorable="d"
                     d:DesignHeight="100" d:DesignWidth="300">
     <StackPanel Margin="5">
-        
+        <TextBlock Style="{StaticResource h3}" Text="Database URL" Margin="5"></TextBlock>
+        <TextBox x:Name="tbConnectionUrl" Controls:TextBoxHelper.Watermark="Database URL" Margin="5" Text="{Binding ConnectionUrl}"/>
+        <TextBlock Style="{StaticResource h3}" Text="Database Type" Margin="5"></TextBlock>
+        <Controls:SplitButton x:Name="sbtnDatabaseType" Margin="5" ItemsSource="{Binding EnumDatabaseType}" SelectedIndex="0">
+        </Controls:SplitButton>
+        <Button x:Name="btnConnect" Margin="5" Command="{Binding ConnectCommand}" Click="btnConnect_Click">
+            <TextBlock Text="Connect"></TextBlock>
+        </Button>
     </StackPanel>
 </views:MvxWpfView>

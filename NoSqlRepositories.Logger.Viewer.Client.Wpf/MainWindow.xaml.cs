@@ -20,27 +20,24 @@ namespace NoSqlRepositories.Logger.Viewer.Client.Wpf
         /// <param name="regionName"></param>
         public void PresentInRegion(FrameworkElement frameworkElement, string regionName)
         {
+            DataContext = frameworkElement.DataContext;
             switch (regionName)
             {
                 case "LeftPanel":
-                    DataContext = frameworkElement.DataContext;
                     LeftPanel.Children.Clear();
                     LeftPanel.Children.Add(frameworkElement);
                     break;
                 case "RightPanel":
-                    DataContext = frameworkElement.DataContext;
                     RightPanel.Children.Clear();
                     RightPanel.Children.Add(frameworkElement);
                     break;
                 case "FiltersBar":
-                    DataContext = frameworkElement.DataContext;
                     FiltersBar.Children.Clear();
                     FiltersBar.Children.Add(frameworkElement);
                     break;
                 case "Connection":
-                    DataContext = frameworkElement.DataContext;
-                    Connection.Content = frameworkElement;
-                    Connection.Visibility = Visibility.Visible;
+                    Connection.Children.Clear();
+                    Connection.Children.Add(frameworkElement);
                     break;
                 default:
                     //DataContext = frameworkElement.DataContext;

@@ -71,6 +71,7 @@ namespace NoSqlRepositories.Logger.Viewer.ViewModels
                             ILogFetcher fetcher,
                             IMvxFileStore fileStore)
         {
+            ShowViewModel<ConnectionViewModel>();
             ShowViewModel<LogListViewModel>();
             ShowViewModel<LogDetailViewModel>();
             ShowViewModel<LogFilterViewModel>();

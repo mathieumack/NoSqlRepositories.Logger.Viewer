@@ -51,7 +51,8 @@ namespace NoSqlRepositories.Logger.Viewer.ViewModels
         {
             set
             {
-                Mvx.Resolve<IMvxMessenger>().Publish<LogMessage>(new LogMessage(this, value.Id));
+                if (value != null)
+                    Mvx.Resolve<IMvxMessenger>().Publish<LogMessage>(new LogMessage(this, value.Id));
             }
         }
 
@@ -68,19 +69,20 @@ namespace NoSqlRepositories.Logger.Viewer.ViewModels
             this.fileStore = fileStore;
             this.messenger = messenger;
             LogList = new ObservableCollection<LogListItemViewModel>();
-            UpdateLogs();
         }
         
         public void UpdateLogs(UpdateLogListMessage sender = null)
         {
-            IList<Log> logs = fetcher.GetLogs(fileStore);
-            LogList.Clear();
-            foreach (Log log in logs)
-            {
-                LogList.Add(new LogListItemViewModel(messenger, log));
+            if(fetcher.IsLoaded()) { 
+                List<LogLevel> filters = (sender != null ? (sender.Filters != null?(List<LogLevel>)sender.Filters:new List<LogLevel>()) : new List<LogLevel>());
+                IList<Log> logs = fetcher.GetLogs(filters);
+                SelectedItem =  new LogListItemViewModel(messenger, new Log());
+                LogList.Clear();
+                foreach (Log log in logs)
+                {
+                    LogList.Add(new LogListItemViewModel(messenger, log));
+                }
             }
-            if (logs.Count > 0)
-                SelectedItem = new LogListItemViewModel(messenger, logs.First());
         }
 
         #endregion
