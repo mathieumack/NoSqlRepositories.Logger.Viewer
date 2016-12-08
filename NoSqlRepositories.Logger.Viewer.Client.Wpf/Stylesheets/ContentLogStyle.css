@@ -1,0 +1,24 @@
+﻿body{
+    overflow: hidden;
+}
+
+.key{
+    color: dodgerblue;
+    font-weight: bold;
+}
+
+.number{
+    color: darkseagreen;
+}
+
+.string{
+    color: orange;
+}
+
+.boolean{
+    color: mediumpurple;
+}
+
+.null{
+    color: red;
+}

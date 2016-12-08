@@ -12,6 +12,8 @@
     <StackPanel Margin="5">
         <TextBlock Style="{StaticResource h3}" Text="Database URL" Margin="5"></TextBlock>
         <TextBox x:Name="tbConnectionUrl" Controls:TextBoxHelper.Watermark="Database URL" Margin="5" Text="{Binding ConnectionUrl}"/>
+        <TextBlock Style="{StaticResource h3}" Text="Database Name" Margin="5"></TextBlock>
+        <TextBox x:Name="tbDatabaseName" Controls:TextBoxHelper.Watermark="Database Name" Margin="5" Text="{Binding DatabaseName}"/>
         <TextBlock Style="{StaticResource h3}" Text="Database Type" Margin="5"></TextBlock>
         <Controls:SplitButton x:Name="sbtnDatabaseType" Margin="5" ItemsSource="{Binding EnumDatabaseType}" SelectedIndex="0">
         </Controls:SplitButton>

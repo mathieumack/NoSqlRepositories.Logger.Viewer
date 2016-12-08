@@ -11,6 +11,7 @@ using System.Reflection;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using System.Text.RegularExpressions;
 
 namespace NoSqlRepositories.Logger.Viewer.ViewModels
 {
@@ -36,7 +37,7 @@ namespace NoSqlRepositories.Logger.Viewer.ViewModels
         /// <summary>
         /// Objet aditionnel au log
         /// </summary>
-        private object contentLog;
+        private string contentLog;
 
         private readonly MvxSubscriptionToken messengerToken;
 
@@ -99,11 +100,11 @@ namespace NoSqlRepositories.Logger.Viewer.ViewModels
         /// <summary>
         /// Objet additionnel au log
         /// </summary>
-        public object ContentLog
+        public string ContentLog
         {
             get
             {
-                return contentLog;
+                return (contentLog==null?contentLog:HighlightJson(contentLog));
             }
             set
             {
@@ -153,64 +154,36 @@ namespace NoSqlRepositories.Logger.Viewer.ViewModels
 
         #region Private Methods
 
-        /*
-        private string FormatLogObject(object o)
+        public string HighlightJson(string json)
         {
-            string message = "";
-            if (!IsIterable(o))
-            {
-                Type objectType = o.GetType();
-                if (objectType.GetTypeInfo().IsGenericType || objectType.Namespace.StartsWith("System"))
-                {
-                    // Object générique
-                    return o.ToString();
-                }
-                else
-                {
-                    // Objet non générique -> On itère sur les propriétés
-                    foreach (PropertyInfo prop in objectType.GetProperties())
+            return Regex.Replace(
+                json,
+                @"(¤(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\¤])*¤(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)".Replace('¤', '"'),
+                match => {
+                    var cls = "number";
+                    if (Regex.IsMatch(match.Value, @"^¤".Replace('¤', '"')))
                     {
-                        if (prop.CanRead)
+                        if (Regex.IsMatch(match.Value, ":$"))
                         {
-                            object oValue = prop.GetValue(o);
-                            message += prop.Name + " : " + oValue.ToString() + "\n";
+                            cls = "key";
+                        }
+                        else
+                        {
+                            cls = "string";
                         }
                     }
-                }
-            }
-            else
-            {
-                var enumerable = o as System.Collections.IEnumerable;
-                message += "[ ";
-                foreach(var item in enumerable)
-                {
-                    message += item.ToString() + " ";
-                }
-                message += "]";
-            }
-            return message;
+                    else if (Regex.IsMatch(match.Value, "true|false"))
+                    {
+                        cls = "boolean";
+                    }
+                    else if (Regex.IsMatch(match.Value, "null"))
+                    {
+                        cls = "null";
+                    }
+                    return "<span class=\"" + cls + "\">" + match + "</span>";
+                });
         }
 
-
-        private bool IsList(object o)
-        {
-            return o is IList &&
-               o.GetType().GetTypeInfo().IsGenericType &&
-               o.GetType().GetGenericTypeDefinition().IsAssignableFrom(typeof(List<>));
-        }
-
-        private bool IsDictionary(object o)
-        {
-            return o is IDictionary &&
-               o.GetType().GetTypeInfo().IsGenericType &&
-               o.GetType().GetGenericTypeDefinition().IsAssignableFrom(typeof(Dictionary<,>));
-        }
-
-        private bool IsIterable(object o)
-        {
-            return IsDictionary(o) || IsList(o) || o is JArray;
-        }
-        */
         #endregion
     }
 }

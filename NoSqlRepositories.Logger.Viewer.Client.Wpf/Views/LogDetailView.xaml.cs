@@ -1,6 +1,8 @@
 ﻿using NoSqlRepositories.Logger.Viewer.Client.Wpf.Attributes;
 using System.Windows.Controls;
 using MvvmCross.Wpf.Views;
+using mshtml;
+using System.Windows;
 
 namespace NoSqlRepositories.Logger.Viewer.Client.Wpf.Views
 {
@@ -13,6 +15,19 @@ namespace NoSqlRepositories.Logger.Viewer.Client.Wpf.Views
         public LogDetailView()
         {
             InitializeComponent();
+        }
+
+
+        private void webBrowserJson_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        {
+            webBrowserJson.Height = ((IHTMLElement2)((HTMLDocument)webBrowserJson.Document).body).scrollHeight * 0.80;
+            webBrowserJson.IsEnabled = false;
+        }
+
+        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if(webBrowserJson.Document != null)
+                Clipboard.SetText(((HTMLDocument)webBrowserJson.Document).body.innerText);
         }
     }
 }

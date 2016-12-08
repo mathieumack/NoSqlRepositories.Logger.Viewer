@@ -4,7 +4,9 @@
                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-                  xmlns:local="clr-namespace:NoSqlRepositories.Logger.Viewer.Client.Wpf.Views">
+                  xmlns:local="clr-namespace:NoSqlRepositories.Logger.Viewer.Client.Wpf.Views"
+                  xmlns:ns="clr-namespace:NoSqlRepositories.Logger.Viewer.Client.Wpf"
+                  xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks">
 
     <ScrollViewer Margin="5">
         <StackPanel>
@@ -15,8 +17,14 @@
             <TextBlock Text="{Binding LongMessage}" Style="{StaticResource labelDetail}" Margin="14,0,0,0"></TextBlock>
             <TextBlock Text="Log level :" Style="{StaticResource h3}" Margin="5"></TextBlock>
             <TextBlock Text="{Binding Level}" Style="{StaticResource labelDetail}" Margin="14,0,0,0"></TextBlock>
-            <TextBlock Text="Content :" Style="{StaticResource h3}" Margin="5"></TextBlock>
-            <TextBlock Text="{Binding ContentLog}" Style="{StaticResource labelDetail}" Margin="14,0,0,0" Focusable="True"></TextBlock>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Content :" Style="{StaticResource h3}" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                <Button Style="{StaticResource MetroCircleButtonStyle}" Width="40" Height="40" ToolTip="Copy to clipboard" Click="Button_Click">
+                    <iconPacks:PackIconModern Kind="ClipboardPaste" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                </Button>
+            </StackPanel>
+            <WebBrowser x:Name="webBrowserJson" HorizontalAlignment="Stretch" ns:WebBrowserUtility.BindableSource="{Binding ContentLog}" LoadCompleted="webBrowserJson_LoadCompleted"/>
+            
         </StackPanel>
     </ScrollViewer>
 </views:MvxWpfView>

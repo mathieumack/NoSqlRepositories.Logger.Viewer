@@ -21,6 +21,8 @@ namespace NoSqlLogReader.ViewModels
 
         private string connectionUrl;
 
+        private string databaseName;
+
         #endregion
 
         #region Public Fields
@@ -52,6 +54,19 @@ namespace NoSqlLogReader.ViewModels
             }
         }
 
+        public string DatabaseName
+        {
+            get
+            {
+                return databaseName;
+            }
+            set
+            {
+                databaseName = value;
+                RaisePropertyChanged(() => DatabaseName);
+            }
+        }
+
         public IEnumerable<string> EnumDatabaseType { get; set; }
 
         #endregion
@@ -65,7 +80,8 @@ namespace NoSqlLogReader.ViewModels
 
             //TODO: Remove debug lines
             DatabaseType = DatabaseType.JsonFileRepository;
-            connectionUrl = ".";
+            connectionUrl = "C:\\Users\\fleau\\AppData\\Roaming";
+            databaseName = "Logs";
         }
 
         #endregion
@@ -76,7 +92,7 @@ namespace NoSqlLogReader.ViewModels
             {
                 try
                 { 
-                    JsonFileRepository<Log> repo = new JsonFileRepository<Log>(connectionUrl, "Logs");
+                    JsonFileRepository<Log> repo = new JsonFileRepository<Log>(connectionUrl, databaseName);
                     Mvx.Resolve<ILogFetcher>().LoadRepo(repo);
                     Mvx.Resolve<IMvxMessenger>().Publish<UpdateLogListMessage>(new UpdateLogListMessage(this, null));
                     return true;

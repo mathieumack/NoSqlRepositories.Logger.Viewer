@@ -2,6 +2,10 @@
 using NoSqlRepositories.Logger.Viewer.Services;
 using System.Linq;
 using NoSqlRepositories.Core;
+using NoSqlLogReader.Core;
+using MvvmCross.Platform;
+using MvvmCross.Plugins.File;
+using System.IO;
 
 namespace NoSqlRepositories.Logger.Viewer.Core.Services
 {
@@ -28,9 +32,11 @@ namespace NoSqlRepositories.Logger.Viewer.Core.Services
             return repo.GetById(id);
         }
 
+
         public bool IsLoaded()
         {
             return (this.repo != null);
         }
+
     }
 }

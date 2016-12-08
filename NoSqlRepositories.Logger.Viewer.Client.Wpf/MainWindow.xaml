@@ -11,7 +11,7 @@
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <StackPanel Orientation="Horizontal">
-                <ToggleButton IsChecked="{Binding ElementName=ConnectionFlyout, Path=IsOpen}" Cursor="Hand">
+                <ToggleButton IsChecked="{Binding ElementName=ConnectionFlyout, Path=IsOpen}" Cursor="Hand" Click="ToggleButton_Click">
                     <StackPanel Orientation="Horizontal">
                         <iconPacks:PackIconModern Kind="Connect" VerticalAlignment="Center" HorizontalAlignment="Center" />
                         <TextBlock Margin="4 0 0 0"
@@ -24,7 +24,7 @@
     </Controls:MetroWindow.RightWindowCommands>
     <Controls:MetroWindow.Flyouts>
         <Controls:FlyoutsControl>
-            <Controls:Flyout Header="Connection" Name="ConnectionFlyout" Position="Right" Width="300">
+            <Controls:Flyout Header="Connection" CloseButtonVisibility="Hidden" Name="ConnectionFlyout" Position="Right" Width="300" Theme="Accent">
                 <Grid Name="Connection"></Grid>
             </Controls:Flyout>
         </Controls:FlyoutsControl>
