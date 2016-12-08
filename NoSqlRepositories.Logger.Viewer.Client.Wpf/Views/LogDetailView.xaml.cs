@@ -3,6 +3,8 @@ using System.Windows.Controls;
 using MvvmCross.Wpf.Views;
 using mshtml;
 using System.Windows;
+using System;
+using NoSqlLogReader.Core;
 
 namespace NoSqlRepositories.Logger.Viewer.Client.Wpf.Views
 {
@@ -28,6 +30,15 @@ namespace NoSqlRepositories.Logger.Viewer.Client.Wpf.Views
         {
             if(webBrowserJson.Document != null)
                 Clipboard.SetText(((HTMLDocument)webBrowserJson.Document).body.innerText);
+        }
+
+        private void lbAttachments_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Attachment attachment = (Attachment)((ListBox)sender).SelectedItem;
+            if(attachment != null) { 
+                string path = attachment.Path.Substring(1);
+                System.Diagnostics.Process.Start(path.Insert(0, Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)));
+            }
         }
     }
 }

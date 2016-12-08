@@ -69,10 +69,12 @@ namespace NoSqlRepositories.Logger.Viewer.ViewModels
             this.fileStore = fileStore;
             this.messenger = messenger;
             LogList = new ObservableCollection<LogListItemViewModel>();
+            
         }
         
         public void UpdateLogs(UpdateLogListMessage sender = null)
         {
+            
             if(fetcher.IsLoaded()) { 
                 List<LogLevel> filters = (sender != null ? (sender.Filters != null?(List<LogLevel>)sender.Filters:new List<LogLevel>()) : new List<LogLevel>());
                 IList<Log> logs = fetcher.GetLogs(filters);

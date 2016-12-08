@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
+using NoSqlLogReader.Core;
 
 namespace NoSqlRepositories.Logger.Viewer.ViewModels
 {
@@ -38,6 +39,11 @@ namespace NoSqlRepositories.Logger.Viewer.ViewModels
         /// Objet aditionnel au log
         /// </summary>
         private string contentLog;
+
+        /// <summary>
+        /// List of attachments
+        /// </summary>
+        private List<Attachment> attachments;
 
         private readonly MvxSubscriptionToken messengerToken;
 
@@ -113,6 +119,19 @@ namespace NoSqlRepositories.Logger.Viewer.ViewModels
             }
         }
 
+
+        public List<Attachment> Attachments
+        {
+            get
+            {
+                return attachments;
+            }
+            set
+            {
+                attachments = value;
+                RaisePropertyChanged(() => Attachments);
+            }
+        }
         #endregion
 
         #region Constructor
@@ -124,8 +143,6 @@ namespace NoSqlRepositories.Logger.Viewer.ViewModels
             this.fileStore = fileStore;
             this.fetcher = fetcher;
             messengerToken = messenger.Subscribe<LogMessage>(UpdateData);
-
-            
         }
 
         #endregion
@@ -145,6 +162,7 @@ namespace NoSqlRepositories.Logger.Viewer.ViewModels
                 this.LongMessage = selectedLog.LongMessage;
                 this.Level = selectedLog.Level;
                 this.ContentLog = JValue.Parse(selectedLog.ContentLog).ToString(Formatting.Indented);
+                this.Attachments = fetcher.GetAttachments(selectedLog.Id);
             }
 
            

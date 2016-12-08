@@ -77,11 +77,7 @@ namespace NoSqlLogReader.ViewModels
         {
             var enumNames = Enum.GetNames(typeof(DatabaseType));
             EnumDatabaseType = enumNames;
-
-            //TODO: Remove debug lines
-            DatabaseType = DatabaseType.JsonFileRepository;
-            connectionUrl = "C:\\Users\\fleau\\AppData\\Roaming";
-            databaseName = "Logs";
+            databaseType = DatabaseType.JsonFileRepository;
         }
 
         #endregion
@@ -90,17 +86,10 @@ namespace NoSqlLogReader.ViewModels
         {
             if(databaseType == DatabaseType.JsonFileRepository)
             {
-                try
-                { 
-                    JsonFileRepository<Log> repo = new JsonFileRepository<Log>(connectionUrl, databaseName);
-                    Mvx.Resolve<ILogFetcher>().LoadRepo(repo);
-                    Mvx.Resolve<IMvxMessenger>().Publish<UpdateLogListMessage>(new UpdateLogListMessage(this, null));
-                    return true;
-                }
-                catch(Exception e)
-                {
-                    return false;
-                }
+                JsonFileRepository<Log> repo = new JsonFileRepository<Log>(connectionUrl, databaseName);
+                Mvx.Resolve<ILogFetcher>().LoadRepo(repo);
+                Mvx.Resolve<IMvxMessenger>().Publish<UpdateLogListMessage>(new UpdateLogListMessage(this, null));
+                return true;
             }
             else if(databaseType == DatabaseType.CouchBaseLite)
             {
@@ -119,7 +108,10 @@ namespace NoSqlLogReader.ViewModels
             {
                 return new MvxCommand(() =>
                 {
-                    Connect();
+                    if (Connect())
+                    {
+                        Mvx.Resolve<ILogFetcher>().CreateAttachmentsCopies();
+                    }
                 });
             }
         }

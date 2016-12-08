@@ -1,4 +1,5 @@
-﻿using NoSqlRepositories.Core;
+﻿using NoSqlLogReader.Core;
+using NoSqlRepositories.Core;
 using System.Collections.Generic;
 
 namespace NoSqlRepositories.Logger.Viewer.Services
@@ -16,5 +17,9 @@ namespace NoSqlRepositories.Logger.Viewer.Services
         Log GetLogById(string id);
 
         bool IsLoaded();
+
+        void CreateAttachmentsCopies();
+
+        List<Attachment> GetAttachments(string id);
     }
 }

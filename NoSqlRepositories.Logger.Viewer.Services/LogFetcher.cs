@@ -38,5 +38,52 @@ namespace NoSqlRepositories.Logger.Viewer.Core.Services
             return (this.repo != null);
         }
 
+        /// <summary>
+        /// Initialize the temp folder with every attachments copies
+        /// </summary>
+        public void CreateAttachmentsCopies()
+        {
+            IList<Log> logs = repo.GetAll();
+            IMvxFileStore fileStore = Mvx.Resolve<IMvxFileStore>();
+            string tempDirPath = @"./TempAttachments";
+            // Create/Clear temp dir
+            if (fileStore.FolderExists(tempDirPath))
+            {
+                fileStore.DeleteFolder(tempDirPath, true);
+            }
+            fileStore.EnsureFolderExists(tempDirPath);
+            
+
+            foreach(Log log in logs)
+            {
+                IList<string> attachmentsNames = repo.GetAttachmentNames(log.Id);
+                if (attachmentsNames.Count > 0)
+                    fileStore.EnsureFolderExists(tempDirPath + "/" + log.Id);
+                foreach(string attachmentName in attachmentsNames)
+                {
+                    Stream stream = repo.GetAttachment(log.Id, attachmentName);
+                    stream.Seek(0, SeekOrigin.Begin);
+                    StreamReader sr = new StreamReader(stream);
+                    //fileStore.WriteFile(tempDirPath + "/" + log.Id + "/" + attachmentName, sr.ReadToEnd());
+                    int b = stream.ReadByte();
+                    Stream tempFile = fileStore.OpenWrite(tempDirPath + "/" + log.Id + "/" + attachmentName);
+                    while (b != -1) {
+                        tempFile.WriteByte((byte)b);
+                        b = stream.ReadByte();
+                    }
+                    
+                }
+            }
+        }
+
+        public List<Attachment> GetAttachments(string id)
+        {
+            List<Attachment> attachments = new List<Attachment>();
+            foreach(string name in repo.GetAttachmentNames(id))
+            {
+                attachments.Add(new Attachment(name, @"./TempAttachments/" + id + "/" + name));
+            }
+            return attachments;
+        }
     }
 }
