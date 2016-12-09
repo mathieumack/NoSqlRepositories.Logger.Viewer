@@ -2,10 +2,12 @@
 using MvvmCross.Platform;
 using MvvmCross.Plugins.File;
 using MvvmCross.Plugins.Messenger;
+using MvvX.Plugins.CouchBaseLite;
 using NoSqlLogReader.Core;
 using NoSqlLogReader.ViewModels.Messenger;
 using NoSqlRepositories.Logger;
 using NoSqlRepositories.Logger.Viewer.Services;
+using NoSqlRepositories.MvvX.CouchBaseLite.Pcl;
 using NoSqlRepositories.MvvX.JsonFiles.Pcl;
 using System;
 using System.Collections.Generic;
@@ -84,19 +86,29 @@ namespace NoSqlLogReader.ViewModels
         public bool Connect()
         {
             if(databaseType == DatabaseType.JsonFileRepository)
-            {
-                var repo = new JsonFileRepository<Log>(Mvx.Resolve<IMvxFileStore>(), databaseName);
-                Mvx.Resolve<ILogFetcher>().LoadRepo(repo);
-                Mvx.Resolve<IMvxMessenger>().Publish<UpdateLogListMessage>(new UpdateLogListMessage(this, null));
-                return true;
-            }
+                return ConnectJsonFile();
             else if(databaseType == DatabaseType.CouchBaseLite)
-            {
-                //TODO: CBL Connect
-                //CouchBaseLiteRepository<Log> repo = new CouchBaseLiteRepository<Log>(...);
-            }
+                return ConnectCBDatabase();
             
             return false;
+        }
+
+        public bool ConnectJsonFile()
+        {
+            var repo = new JsonFileRepository<Log>(Mvx.Resolve<IMvxFileStore>(), databaseName);
+            Mvx.Resolve<ILogFetcher>().LoadRepo(repo);
+            Mvx.Resolve<IMvxMessenger>().Publish<UpdateLogListMessage>(new UpdateLogListMessage(this, null));
+            return true;
+        }
+
+        public bool ConnectCBDatabase()
+        {
+            var couchBaseLite = Mvx.Resolve<ICouchBaseLite>();
+            couchBaseLite.Initialize(ConnectionUrl);
+            var repo = new CouchBaseLiteRepository<Log>(couchBaseLite, DatabaseName);
+            Mvx.Resolve<ILogFetcher>().LoadRepo(repo);
+            Mvx.Resolve<IMvxMessenger>().Publish<UpdateLogListMessage>(new UpdateLogListMessage(this, null));
+            return true;
         }
 
         #region Commands

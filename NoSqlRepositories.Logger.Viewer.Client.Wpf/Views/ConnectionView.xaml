@@ -15,7 +15,7 @@
         <TextBlock Style="{StaticResource h3}" Text="Database Name" Margin="5"></TextBlock>
         <TextBox x:Name="tbDatabaseName" Controls:TextBoxHelper.Watermark="Database Name" Margin="5" Text="{Binding DatabaseName}"/>
         <TextBlock Style="{StaticResource h3}" Text="Database Type" Margin="5"></TextBlock>
-        <Controls:SplitButton x:Name="sbtnDatabaseType" Margin="5" ItemsSource="{Binding EnumDatabaseType}" SelectedIndex="0">
+        <Controls:SplitButton x:Name="sbtnDatabaseType" Margin="5" ItemsSource="{Binding EnumDatabaseType}" SelectedItem="{Binding DatabaseType}">
         </Controls:SplitButton>
         <Button x:Name="btnConnect" Margin="5" Command="{Binding ConnectCommand}" Click="btnConnect_Click">
             <TextBlock Text="Connect"></TextBlock>

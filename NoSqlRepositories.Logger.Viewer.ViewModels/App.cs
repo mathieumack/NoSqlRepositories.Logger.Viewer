@@ -36,7 +36,6 @@ namespace NoSqlRepositories.Logger.Viewer.ViewModels
             builder.Update(container);
 
             Mvx.RegisterSingleton<ILogFetcher>(new LogFetcher());
-            //var logFetcher = Mvx.Resolve<ILogFetcher>();
 
             // Start ViewModel
             Mvx.RegisterSingleton<IMvxAppStart>(new MvxAppStart<MainViewModel>());
