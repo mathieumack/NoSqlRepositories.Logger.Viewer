@@ -5,7 +5,6 @@ using MvvX.Plugins.AssemblyFinder;
 using System.Linq;
 using NoSqlRepositories.Logger.Viewer.Services;
 using NoSqlRepositories.Logger.Viewer.Core.Services;
-using NoSqlRepositories.JsonFiles.Net;
 
 namespace NoSqlRepositories.Logger.Viewer.ViewModels
 {
@@ -37,7 +36,7 @@ namespace NoSqlRepositories.Logger.Viewer.ViewModels
             builder.Update(container);
 
             Mvx.RegisterSingleton<ILogFetcher>(new LogFetcher());
-            var logFetcher = Mvx.Resolve<ILogFetcher>();
+            //var logFetcher = Mvx.Resolve<ILogFetcher>();
 
             // Start ViewModel
             Mvx.RegisterSingleton<IMvxAppStart>(new MvxAppStart<MainViewModel>());

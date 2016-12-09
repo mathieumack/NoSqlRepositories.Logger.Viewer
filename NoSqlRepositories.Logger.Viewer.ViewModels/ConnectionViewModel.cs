@@ -1,13 +1,12 @@
 ﻿using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
+using MvvmCross.Plugins.File;
 using MvvmCross.Plugins.Messenger;
 using NoSqlLogReader.Core;
 using NoSqlLogReader.ViewModels.Messenger;
-using NoSqlRepositories.Core;
-using NoSqlRepositories.JsonFiles.Net;
 using NoSqlRepositories.Logger;
 using NoSqlRepositories.Logger.Viewer.Services;
-using NoSqlRepositories.MvvX.CouchBaseLite.Pcl;
+using NoSqlRepositories.MvvX.JsonFiles.Pcl;
 using System;
 using System.Collections.Generic;
 
@@ -86,7 +85,7 @@ namespace NoSqlLogReader.ViewModels
         {
             if(databaseType == DatabaseType.JsonFileRepository)
             {
-                JsonFileRepository<Log> repo = new JsonFileRepository<Log>(connectionUrl, databaseName);
+                var repo = new JsonFileRepository<Log>(Mvx.Resolve<IMvxFileStore>(), databaseName);
                 Mvx.Resolve<ILogFetcher>().LoadRepo(repo);
                 Mvx.Resolve<IMvxMessenger>().Publish<UpdateLogListMessage>(new UpdateLogListMessage(this, null));
                 return true;

@@ -101,6 +101,10 @@
       <HintPath>..\packages\NoSqlRepositories.MvvX.CouchBaseLite.Pcl.1.16.44.0\lib\portable-net45+sl5+wp8+wpa81+win8+monoandroid+monotouch\NoSqlRepositories.MvvX.CouchBaseLite.Pcl.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="NoSqlRepositories.MvvX.JsonFiles.Pcl, Version=1.16.44.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NoSqlRepositories.MvvX.JsonFiles.Pcl.1.16.44.0\lib\portable-net45+sl5+wp8+wpa81+win8+monoandroid+monotouch\NoSqlRepositories.MvvX.JsonFiles.Pcl.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
