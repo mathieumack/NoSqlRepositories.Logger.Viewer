@@ -9,7 +9,12 @@
                   xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks">
 
     <ScrollViewer Margin="5">
-        <StackPanel>
+        <Grid x:Name="detailsGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*" x:Name="WebBrowserRow"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0">
             <TextBlock Text="Detail :" Style="{StaticResource h1}" Margin="5"></TextBlock>
             <!-- Message -->
             <TextBlock Text="Message :" Style="{StaticResource h3}" Margin="5"></TextBlock>
@@ -52,9 +57,10 @@
                     <iconPacks:PackIconModern Kind="ClipboardPaste" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 </Button>
             </StackPanel>
-            <WebBrowser x:Name="webBrowserJson" HorizontalAlignment="Stretch" ns:WebBrowserUtility.BindableSource="{Binding ContentLog}" LoadCompleted="webBrowserJson_LoadCompleted"/>
-            
-        </StackPanel>
+            </StackPanel>
+            <WebBrowser x:Name="webBrowserJson" Grid.Row="1" HorizontalAlignment="Stretch" ns:WebBrowserUtility.BindableSource="{Binding ContentLog}" 
+                        LoadCompleted="webBrowserJson_LoadCompleted" VerticalAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+        </Grid>
     </ScrollViewer>
 </views:MvxWpfView>
     

@@ -5,7 +5,7 @@
                     xmlns:mc="http://schemas.openxmlformats.org/mark up-compatibility/2006" 
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
                     xmlns:local="clr-namespace:NoSqlRepositories.Logger.Viewer.Client.Wpf.Views">
-    <StackPanel Margin="5">
+    <Grid Margin="5" ScrollViewer.VerticalScrollBarVisibility="Auto">
         <TextBlock Text="List of logs:" Style="{StaticResource h1}" Margin="5"></TextBlock>
         <ListBox x:Name="lbLogs" ItemsSource="{Binding LogList}" SelectedItem="{Binding SelectedItem}">
             <ListBox.ItemTemplate>
@@ -14,5 +14,5 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-    </StackPanel>
+    </Grid>
 </views:MvxWpfView>

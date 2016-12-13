@@ -22,7 +22,7 @@ namespace NoSqlRepositories.Logger.Viewer.Client.Wpf.Views
 
         private void webBrowserJson_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
-            webBrowserJson.Height = ((IHTMLElement2)((HTMLDocument)webBrowserJson.Document).body).scrollHeight * 0.80;
+            //webBrowserJson.Height = ((IHTMLElement2)((HTMLDocument)webBrowserJson.Document).body).scrollHeight * 0.80;
             webBrowserJson.IsEnabled = false;
         }
 
