@@ -46,13 +46,5 @@ namespace NoSqlRepositories.Logger.Viewer.Client.Wpf
                     break;
             }
         }
-
-        private void ToggleButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (RightPanel.Visibility == Visibility.Hidden)
-                RightPanel.Visibility = Visibility.Visible;
-            else
-                RightPanel.Visibility = Visibility.Hidden;
-        }
     }
 }
