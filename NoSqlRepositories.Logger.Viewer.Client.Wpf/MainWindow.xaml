@@ -33,6 +33,7 @@
     <Grid x:Name="Main">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250"></ColumnDefinition>
+            <ColumnDefinition Width="5"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
@@ -41,8 +42,10 @@
                 <RowDefinition Height="1*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0" x:Name="FiltersBar" Background="White"></Grid>
+            
             <Grid Grid.Row="1" x:Name="LeftPanel" Background="White"></Grid>
         </Grid>
-        <Grid Grid.Column="1" x:Name="RightPanel" Background="White"></Grid>
+        <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"></GridSplitter>
+        <Grid Grid.Column="2" x:Name="RightPanel" Background="White"></Grid>
     </Grid>
 </Controls:MetroWindow>

@@ -256,6 +256,7 @@
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WebBrowserUtil.cs" />
     <Compile Include="WindowProperties.cs" />
     <Compile Include="WpfPresenter.cs" />
     <Page Include="MainWindow.xaml">

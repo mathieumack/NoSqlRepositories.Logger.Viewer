@@ -7,10 +7,19 @@
                     xmlns:local="clr-namespace:NoSqlRepositories.Logger.Viewer.Client.Wpf.Views">
     <Grid Margin="5" ScrollViewer.VerticalScrollBarVisibility="Auto">
         <TextBlock Text="List of logs:" Style="{StaticResource h1}" Margin="5"></TextBlock>
-        <ListBox x:Name="lbLogs" ItemsSource="{Binding LogList}" SelectedItem="{Binding SelectedItem}">
+        <ListBox VirtualizingPanel.IsVirtualizing="True" x:Name="lbLogs" ItemsSource="{Binding LogList}" SelectedItem="{Binding SelectedItem}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Message}"></TextBlock>
+                    <Grid>
+                        <Ellipse Fill="{Binding Crit}" Width="12" Height="12" StrokeThickness="0" HorizontalAlignment="Left"/>
+                        <DockPanel HorizontalAlignment="Stretch">
+                            <TextBlock Margin="20,0,0,0">
+                                <Run Text="{Binding Message}"></Run>
+                                <Run Text="  "></Run>
+                            </TextBlock>
+                            <TextBlock Margin="0,0, 5,0" Text="{Binding CreationDate}" HorizontalAlignment="Right"></TextBlock>
+                        </DockPanel>
+                    </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

@@ -78,6 +78,7 @@ namespace NoSqlRepositories.Logger.Viewer.ViewModels
             if(fetcher.IsLoaded()) { 
                 List<LogLevel> filters = (sender != null ? (sender.Filters != null?(List<LogLevel>)sender.Filters:new List<LogLevel>()) : new List<LogLevel>());
                 IList<Log> logs = fetcher.GetLogs(filters);
+                logs = logs.OrderByDescending(l => l.SystemCreationDate).ToList();
                 SelectedItem =  new LogListItemViewModel(messenger, new Log());
                 LogList.Clear();
                 foreach (Log log in logs)

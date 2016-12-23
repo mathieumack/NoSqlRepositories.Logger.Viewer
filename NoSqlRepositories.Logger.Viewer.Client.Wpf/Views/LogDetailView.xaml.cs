@@ -57,38 +57,5 @@ namespace NoSqlRepositories.Logger.Viewer.Client.Wpf.Views
             }
         }
 
-        private void webBrowserJson_TitleChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            string content = ((ChromiumWebBrowser)sender).Title;
-            if (!string.IsNullOrWhiteSpace(content) && content != "rendering")
-            {
-                string styledContent = "<style>" + File.ReadAllText(@"./Stylesheets/ContentLogStyle.css") + "</style><pre>" + content + "</pre>";
-                WebBrowserExtensions.LoadHtml(webBrowserJson, styledContent, "http://rendering/");
-
-                // Height calculation
-                int lines = 0, n = 0;
-
-                while ((n = content.IndexOf("\n", n, StringComparison.InvariantCulture)) != -1)
-                {
-                    n += "\n".Length;
-                    ++lines;
-                }
-                ++lines;
-
-                webBrowserJson.Height = lines * 15.5 + 10;
-
-                // Width calculation
-                HtmlDocument doc = new HtmlDocument();
-                doc.LoadHtml(content);
-                var json = doc.DocumentNode.InnerText;
-                             
-
-                var result = Regex.Split(json, "\r\n|\r|\n");
-                int maxLen = result.Max(l => l.Length);
-
-                webBrowserJson.Width = maxLen * 8;
-            }
-        }
-
     }
 }

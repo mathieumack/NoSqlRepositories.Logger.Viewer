@@ -7,7 +7,8 @@
                   xmlns:local="clr-namespace:NoSqlRepositories.Logger.Viewer.Client.Wpf.Views"
                   xmlns:ns="clr-namespace:NoSqlRepositories.Logger.Viewer.Client.Wpf"
                   xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-                  xmlns:cef="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf">
+                  xmlns:cef="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
+                  xmlns:ext="clr-namespace:NoSqlRepositories.Logger.Viewer.Client.Wpf">
 
     <ScrollViewer Margin="5" ScrollViewer.HorizontalScrollBarVisibility="Auto">
         <Grid x:Name="detailsGrid">
@@ -61,8 +62,9 @@
             </StackPanel>
             <cef:ChromiumWebBrowser x:Name="webBrowserJson" Grid.Row="1"
                                     VerticalAlignment="Top" HorizontalAlignment="Left"
-                                    Address="/" TitleChanged="webBrowserJson_TitleChanged" Title="{Binding ContentLog}"
+                                    Address="/"
                                     RenderOptions.BitmapScalingMode="HighQuality"
+                                    ns:WebBrowserUtil.InputString="{Binding ContentLog}"
                                     />
         </Grid>
     </ScrollViewer>
