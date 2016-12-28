@@ -13,12 +13,18 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
 using NoSqlLogReader.Core;
+using NoSqlLogReader.ViewModels.Messenger;
 
 namespace NoSqlRepositories.Logger.Viewer.ViewModels
 {
     public class LogDetailViewModel : MvxViewModel
     {
         #region Private Fields
+
+        /// <summary>
+        /// Id of the log
+        /// </summary>
+        private string id;
 
         /// <summary>
         /// Message du log
@@ -50,6 +56,8 @@ namespace NoSqlRepositories.Logger.Viewer.ViewModels
         private ILogFetcher fetcher;
 
         private readonly IMvxFileStore fileStore;
+
+        private readonly IMvxMessenger messenger;
 
         #endregion
 
@@ -142,6 +150,7 @@ namespace NoSqlRepositories.Logger.Viewer.ViewModels
         {
             this.fileStore = fileStore;
             this.fetcher = fetcher;
+            this.messenger = messenger;
             messengerToken = messenger.Subscribe<LogMessage>(UpdateData);
         }
 
@@ -161,6 +170,7 @@ namespace NoSqlRepositories.Logger.Viewer.ViewModels
                 this.Message = selectedLog.Message;
                 this.LongMessage = selectedLog.LongMessage;
                 this.Level = selectedLog.Level;
+                this.id = selectedLog.Id;
                 this.ContentLog = JValue.Parse(selectedLog.ContentLog).ToString(Formatting.Indented);
                 this.Attachments = fetcher.GetAttachments(selectedLog.Id);
             }
@@ -203,5 +213,17 @@ namespace NoSqlRepositories.Logger.Viewer.ViewModels
         }
 
         #endregion
+
+        public MvxCommand DeleteLogCommand
+        {
+            get
+            {
+                return new MvxCommand(() =>
+                {
+                    fetcher.DeleteLogById(this.id);
+                    messenger.Publish<UpdateLogListMessage>(new UpdateLogListMessage(this, null));
+                });
+            }
+        }
     }
 }

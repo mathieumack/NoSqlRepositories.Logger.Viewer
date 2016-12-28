@@ -36,6 +36,7 @@ namespace NoSqlRepositories.Logger.Viewer.Client.Wpf
             {
                 string styledContent = "<meta charset=\"UTF-8\" /><style>" + File.ReadAllText(@"./Stylesheets/ContentLogStyle.css") + "</style><pre>" + content + "</pre>";
                 styledContent = styledContent.Replace("\\r\\n", "</br>");
+                styledContent = styledContent.Replace("\\n", "</br>");
                 webBrowserJson.LoadHtml(styledContent, "http://rendering/", Encoding.UTF8);
 
                 // Height calculation

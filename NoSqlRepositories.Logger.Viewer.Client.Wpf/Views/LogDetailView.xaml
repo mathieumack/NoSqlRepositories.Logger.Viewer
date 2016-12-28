@@ -18,6 +18,9 @@
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0">
                 <TextBlock Text="Detail :" Style="{StaticResource h1}" Margin="5"></TextBlock>
+                <Button HorizontalAlignment="Left" Style="{StaticResource MetroCircleButtonStyle}" x:Name="deleteButton" Width="40" Height="40" ToolTip="Delete log" Command="{Binding DeleteLogCommand}">
+                    <iconPacks:PackIconModern Kind="Delete" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                </Button>
                 <!-- Message -->
                 <TextBlock Text="Message :" Style="{StaticResource h3}" Margin="5"></TextBlock>
                 <TextBlock Text="{Binding Message}" Style="{StaticResource labelDetail}" Margin="14,0,0,0"></TextBlock>

@@ -14,28 +14,50 @@ namespace NoSqlRepositories.Logger.Viewer.Core.Services
 
         private INoSQLRepository<Log> repo;
         
+        /// <summary>
+        /// Load the given repository
+        /// </summary>
+        /// <param name="repo"></param>
         public void LoadRepo(INoSQLRepository<Log> repo)
         {
             this.repo = repo;
         }
 
         /// <summary>
-        /// Charge la liste des logs
+        /// Load all the logs
         /// </summary>
         public IList<Log> GetLogs(IList<LogLevel> filters)
         {
             return repo.GetAll().Where(log => !filters.Any(filter => filter == log.Level)).ToList();
         }
 
+        /// <summary>
+        /// Get a specific log
+        /// </summary>
+        /// <param name="id">Id of the log to get</param>
+        /// <returns></returns>
         public Log GetLogById(string id)
         {
             return repo.GetById(id);
         }
 
-
+        /// <summary>
+        /// Returns if a repository is currently loaded
+        /// </summary>
+        /// <returns></returns>
         public bool IsLoaded()
         {
             return (this.repo != null);
+        }
+
+        /// <summary>
+        /// Delete a log
+        /// </summary>
+        /// <param name="id">id of the log to delete</param>
+        public void DeleteLogById(string id)
+        {
+            if(!string.IsNullOrWhiteSpace(id))
+                repo.Delete(id);
         }
 
         /// <summary>
@@ -76,6 +98,11 @@ namespace NoSqlRepositories.Logger.Viewer.Core.Services
             }
         }
 
+        /// <summary>
+        /// Returns the list of all attachments
+        /// </summary>
+        /// <param name="id">id of the log to get all attachments from</param>
+        /// <returns></returns>
         public List<Attachment> GetAttachments(string id)
         {
             List<Attachment> attachments = new List<Attachment>();

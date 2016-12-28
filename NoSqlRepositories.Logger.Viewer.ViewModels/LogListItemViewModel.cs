@@ -76,7 +76,6 @@ namespace NoSqlRepositories.Logger.Viewer.ViewModels
 
         private string DateTimeToString(DateTime systemCreationDate)
         {
-            string dateInfo = "";
             if(systemCreationDate.Date == DateTime.Now.Date)
             {
                 TimeSpan diff = DateTime.Now.Subtract(systemCreationDate);
@@ -88,13 +87,6 @@ namespace NoSqlRepositories.Logger.Viewer.ViewModels
                     return diff.Seconds + "s ago";
                 else
                     return "Just now";
-                //if (diff.Hours > 0)
-                //    dateInfo += diff.Hours + "h";
-                //if(diff.Minutes > 0)
-                //    dateInfo += diff.Minutes + "min";
-                //if (diff.Hours == 0 && diff.Minutes == 0)
-                //    return "Just now";
-                //return dateInfo + " ago";
             }
             else
             {
