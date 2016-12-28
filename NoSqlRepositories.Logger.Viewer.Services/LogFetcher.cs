@@ -13,14 +13,30 @@ namespace NoSqlRepositories.Logger.Viewer.Core.Services
     {
 
         private INoSQLRepository<Log> repo;
+
+        private string dbName;
+
+        private DatabaseType mode;
         
         /// <summary>
         /// Load the given repository
         /// </summary>
         /// <param name="repo"></param>
-        public void LoadRepo(INoSQLRepository<Log> repo)
+        public void LoadRepo(INoSQLRepository<Log> repo, string dbName, DatabaseType mode)
         {
             this.repo = repo;
+            this.dbName = dbName;
+            this.mode = mode;
+        }
+
+        public DatabaseType GetDatabaseType()
+        {
+            return this.mode;
+        }
+
+        public string GetDBName()
+        {
+            return this.dbName;
         }
 
         /// <summary>

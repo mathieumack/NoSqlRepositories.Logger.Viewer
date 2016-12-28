@@ -10,7 +10,12 @@ namespace NoSqlRepositories.Logger.Viewer.Services
         /// Load the given repository
         /// </summary>
         /// <param name="repo"></param>
-        void LoadRepo(INoSQLRepository<Log> repo);
+        /// <param name="dbName"></param>
+        void LoadRepo(INoSQLRepository<Log> repo, string dbName, DatabaseType mode);
+
+        string GetDBName();
+
+        DatabaseType GetDatabaseType();
 
         /// <summary>
         /// Load all the logs

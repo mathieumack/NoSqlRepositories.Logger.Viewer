@@ -9,6 +9,12 @@
                     mc:Ignorable="d" 
                     d:DesignHeight="100" d:DesignWidth="300">
     <StackPanel Margin="5">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock VerticalAlignment="Center" Style="{StaticResource h3}" Text="Refresh logs" Margin="5"></TextBlock>
+            <Button VerticalAlignment="Center" Margin="5" HorizontalAlignment="Left" Style="{StaticResource MetroCircleButtonStyle}" x:Name="refreshButton" Width="40" Height="40" ToolTip="Refresh log list" Command="{Binding RefreshLogListCommand}">
+                <iconPacks:PackIconModern Kind="Refresh" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            </Button>
+        </StackPanel>
         <TextBlock Text="Filters:" Style="{StaticResource h1}" Margin="5"></TextBlock>
         <Grid>
             <Grid.ColumnDefinitions>

@@ -96,7 +96,7 @@ namespace NoSqlLogReader.ViewModels
         public bool ConnectJsonFile()
         {
             var repo = new JsonFileRepository<Log>(Mvx.Resolve<IMvxFileStore>(), databaseName);
-            Mvx.Resolve<ILogFetcher>().LoadRepo(repo);
+            Mvx.Resolve<ILogFetcher>().LoadRepo(repo, databaseName, DatabaseType.JsonFileRepository);
             Mvx.Resolve<IMvxMessenger>().Publish<UpdateLogListMessage>(new UpdateLogListMessage(this, null));
             return true;
         }
@@ -106,7 +106,7 @@ namespace NoSqlLogReader.ViewModels
             var couchBaseLite = Mvx.Resolve<ICouchBaseLite>();
             couchBaseLite.Initialize(ConnectionUrl);
             var repo = new CouchBaseLiteRepository<Log>(couchBaseLite, DatabaseName);
-            Mvx.Resolve<ILogFetcher>().LoadRepo(repo);
+            Mvx.Resolve<ILogFetcher>().LoadRepo(repo, DatabaseName, DatabaseType.CouchBaseLite);
             Mvx.Resolve<IMvxMessenger>().Publish<UpdateLogListMessage>(new UpdateLogListMessage(this, null));
             return true;
         }

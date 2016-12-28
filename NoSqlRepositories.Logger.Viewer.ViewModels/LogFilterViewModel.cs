@@ -1,9 +1,14 @@
 ﻿using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
+using MvvmCross.Plugins.File;
 using MvvmCross.Plugins.Messenger;
+using MvvX.Plugins.CouchBaseLite;
+using NoSqlLogReader.Core;
 using NoSqlLogReader.ViewModels.Messenger;
 using NoSqlRepositories.Logger;
 using NoSqlRepositories.Logger.Viewer.Services;
+using NoSqlRepositories.MvvX.CouchBaseLite.Pcl;
+using NoSqlRepositories.MvvX.JsonFiles.Pcl;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -108,5 +113,45 @@ namespace NoSqlLogReader.ViewModels
         }
 
 
+        public bool ConnectJsonFile()
+        {
+            var repo = new JsonFileRepository<Log>(Mvx.Resolve<IMvxFileStore>(), fetcher.GetDBName());
+            Mvx.Resolve<ILogFetcher>().LoadRepo(repo, fetcher.GetDBName(), DatabaseType.JsonFileRepository);
+            Mvx.Resolve<IMvxMessenger>().Publish<UpdateLogListMessage>(new UpdateLogListMessage(this, null));
+            return true;
+        }
+
+        public bool ConnectCBDatabase()
+        {
+            var couchBaseLite = Mvx.Resolve<ICouchBaseLite>();
+            var repo = new CouchBaseLiteRepository<Log>(couchBaseLite, fetcher.GetDBName());
+            Mvx.Resolve<ILogFetcher>().LoadRepo(repo, fetcher.GetDBName(), DatabaseType.CouchBaseLite);
+            Mvx.Resolve<IMvxMessenger>().Publish<UpdateLogListMessage>(new UpdateLogListMessage(this, null));
+            return true;
+        }
+
+        public bool RefreshLogList()
+        {
+            switch (this.fetcher.GetDatabaseType())
+            {
+                case DatabaseType.JsonFileRepository:
+                    return ConnectJsonFile();
+                case DatabaseType.CouchBaseLite:
+                    return ConnectCBDatabase();
+                default:
+                    return false;
+            }
+        }
+
+        public MvxCommand RefreshLogListCommand
+        {
+            get
+            {
+                return new MvxCommand(() =>
+                {
+                    RefreshLogList();
+                });
+            }
+        }
     }
 }

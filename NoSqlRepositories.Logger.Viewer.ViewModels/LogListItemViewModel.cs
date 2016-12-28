@@ -97,15 +97,19 @@ namespace NoSqlRepositories.Logger.Viewer.ViewModels
 
         private string LogLevelToColorString(LogLevel level)
         {
-            if (level == LogLevel.Critical)
-                return "Purple";
-            else if (level == LogLevel.Error)
-                return "Red";
-            else if (level == LogLevel.Info)
-                return "Yellow";
-            else if (level == LogLevel.Warning)
-                return "Orange";
-            return "Black";
+            switch (level)
+            {
+                case LogLevel.Critical:
+                    return "Purple";
+                case LogLevel.Error:
+                    return "Red";
+                case LogLevel.Info:
+                    return "Yellow";
+                case LogLevel.Warning:
+                    return "Orange";
+                default:
+                    return "Black";
+            }
         }
     }
 }

@@ -10,66 +10,78 @@
                   xmlns:cef="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
                   xmlns:ext="clr-namespace:NoSqlRepositories.Logger.Viewer.Client.Wpf">
 
-    <ScrollViewer Margin="5" ScrollViewer.HorizontalScrollBarVisibility="Auto">
-        <Grid x:Name="detailsGrid">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="*" x:Name="WebBrowserRow"/>
-            </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0">
-                <TextBlock Text="Detail :" Style="{StaticResource h1}" Margin="5"></TextBlock>
-                <Button HorizontalAlignment="Left" Style="{StaticResource MetroCircleButtonStyle}" x:Name="deleteButton" Width="40" Height="40" ToolTip="Delete log" Command="{Binding DeleteLogCommand}">
-                    <iconPacks:PackIconModern Kind="Delete" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                </Button>
-                <!-- Message -->
-                <TextBlock Text="Message :" Style="{StaticResource h3}" Margin="5"></TextBlock>
-                <TextBlock Text="{Binding Message}" Style="{StaticResource labelDetail}" Margin="14,0,0,0"></TextBlock>
-                <!-- Long Message -->
-                <TextBlock Text="Long message :" Style="{StaticResource h3}" Margin="5"></TextBlock>
-                <TextBlock Text="{Binding LongMessage}" Style="{StaticResource labelDetail}" Margin="14,0,0,0"></TextBlock>
-                <!-- Log level -->
-                <TextBlock Text="Log level :" Style="{StaticResource h3}" Margin="5"></TextBlock>
-                <TextBlock Text="{Binding Level}" Style="{StaticResource labelDetail}" Margin="14,0,0,0"></TextBlock>
-                <!-- Attachments -->
-                <TextBlock Text="Attachments" Style="{StaticResource h3}" Margin="5"></TextBlock>
-                <ListBox ItemsSource="{Binding Attachments}" Margin="5" SelectionChanged="lbAttachments_SelectionChanged">
-                    <ListBox.Style>
-                        <Style TargetType="ListBox" BasedOn="{StaticResource {x:Type ListBox}}">
-                            <Style.Triggers>
-                                <Trigger Property="HasItems" Value="False">
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate>
-                                                <TextBlock Text="None"></TextBlock>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </ListBox.Style>
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Tag="{Binding Path}" Text="{Binding Name}"></TextBlock>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-
-                </ListBox>
-                <!-- Content Log -->
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Content :" Style="{StaticResource h3}" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                    <Button Style="{StaticResource MetroCircleButtonStyle}" Width="40" Height="40" ToolTip="Copy to clipboard" Click="Button_Click">
-                        <iconPacks:PackIconModern Kind="ClipboardPaste" VerticalAlignment="Center" HorizontalAlignment="Center" />
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <DockPanel>
+            <Border BorderBrush="Gray" DockPanel.Dock="Top" BorderThickness="0,0,0,3">
+                <StackPanel Grid.Row="0">
+                    <Button Margin="10,5,10,5" HorizontalAlignment="Left" Style="{StaticResource MetroCircleButtonStyle}" x:Name="deleteButton" Width="40" Height="40" ToolTip="Delete log" Command="{Binding DeleteLogCommand}">
+                        <iconPacks:PackIconModern Kind="Delete" VerticalAlignment="Center" HorizontalAlignment="Center" />
                     </Button>
                 </StackPanel>
-            </StackPanel>
-            <cef:ChromiumWebBrowser x:Name="webBrowserJson" Grid.Row="1"
-                                    VerticalAlignment="Top" HorizontalAlignment="Left"
-                                    Address="/"
-                                    RenderOptions.BitmapScalingMode="HighQuality"
-                                    ns:WebBrowserUtil.InputString="{Binding ContentLog}"
-                                    />
-        </Grid>
-    </ScrollViewer>
+            </Border>
+        </DockPanel>
+        <ScrollViewer Grid.Row="1" Margin="5" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+            <Grid x:Name="detailsGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*" x:Name="WebBrowserRow"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0">
+                    <TextBlock Text="Detail :" Style="{StaticResource h1}" Margin="5"></TextBlock>
+                
+                    <!-- Message -->
+                    <TextBlock Text="Message :" Style="{StaticResource h3}" Margin="5"></TextBlock>
+                    <TextBlock Text="{Binding Message}" Style="{StaticResource labelDetail}" Margin="14,0,0,0"></TextBlock>
+                    <!-- Long Message -->
+                    <TextBlock Text="Long message :" Style="{StaticResource h3}" Margin="5"></TextBlock>
+                    <TextBlock Text="{Binding LongMessage}" Style="{StaticResource labelDetail}" Margin="14,0,0,0"></TextBlock>
+                    <!-- Log level -->
+                    <TextBlock Text="Log level :" Style="{StaticResource h3}" Margin="5"></TextBlock>
+                    <TextBlock Text="{Binding Level}" Style="{StaticResource labelDetail}" Margin="14,0,0,0"></TextBlock>
+                    <!-- Attachments -->
+                    <TextBlock Text="Attachments" Style="{StaticResource h3}" Margin="5"></TextBlock>
+                    <ListBox ItemsSource="{Binding Attachments}" Margin="5" SelectionChanged="lbAttachments_SelectionChanged">
+                        <ListBox.Style>
+                            <Style TargetType="ListBox" BasedOn="{StaticResource {x:Type ListBox}}">
+                                <Style.Triggers>
+                                    <Trigger Property="HasItems" Value="False">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate>
+                                                    <TextBlock Text="None"></TextBlock>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ListBox.Style>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Tag="{Binding Path}" Text="{Binding Name}"></TextBlock>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+
+                    </ListBox>
+                    <!-- Content Log -->
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Content :" Style="{StaticResource h3}" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                        <Button Style="{StaticResource MetroCircleButtonStyle}" Width="40" Height="40" ToolTip="Copy to clipboard" Click="Button_Click">
+                            <iconPacks:PackIconModern Kind="ClipboardPaste" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+                <cef:ChromiumWebBrowser x:Name="webBrowserJson" Grid.Row="1"
+                                        VerticalAlignment="Top" HorizontalAlignment="Left"
+                                        RenderOptions.BitmapScalingMode="HighQuality"
+                                        ns:WebBrowserUtil.InputString="{Binding ContentLog}"
+                                        />
+            </Grid>
+        </ScrollViewer>
+    </Grid>
 </views:MvxWpfView>
     
