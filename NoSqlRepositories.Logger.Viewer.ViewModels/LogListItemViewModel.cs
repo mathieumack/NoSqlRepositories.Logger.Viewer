@@ -1,12 +1,6 @@
 ﻿using MvvmCross.Core.ViewModels;
 using MvvmCross.Plugins.Messenger;
-using NoSqlRepositories.Logger;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media;
 
 namespace NoSqlRepositories.Logger.Viewer.ViewModels
 {
