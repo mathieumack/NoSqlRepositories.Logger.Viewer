@@ -4,6 +4,7 @@ using MvvmCross.Wpf.Views;
 using NoSqlRepositories.Logger.Viewer.Client.Wpf;
 using System;
 using System.Windows;
+using CefSharp;
 
 namespace NoSqlRepositories.Logger.Viewer.Client.Wpf
 {
@@ -16,6 +17,12 @@ namespace NoSqlRepositories.Logger.Viewer.Client.Wpf
 
         private void DoSetup()
         {
+            var settings = new CefSettings();
+            settings.CefCommandLineArgs.Add("disable-gpu", "1");
+            settings.CefCommandLineArgs.Add("disable-gpu-compositing", "1");
+            settings.BrowserSubprocessPath = @"x86\CefSharp.BrowserSubprocess.exe";
+            Cef.Initialize(settings, performDependencyCheck: false, browserProcessHandler: null);
+
             LoadMvxAssemblyResources();
 
             var presenter = new WpfPresenter(MainWindow);
