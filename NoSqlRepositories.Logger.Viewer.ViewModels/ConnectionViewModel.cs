@@ -11,6 +11,7 @@ using NoSqlRepositories.MvvX.CouchBaseLite.Pcl;
 using NoSqlRepositories.MvvX.JsonFiles.Pcl;
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace NoSqlLogReader.ViewModels
 {
@@ -70,6 +71,21 @@ namespace NoSqlLogReader.ViewModels
 
         public IEnumerable<string> EnumDatabaseType { get; set; }
 
+        public string DatabaseTypeName {
+            get
+            {
+                return Enum.GetName(typeof(DatabaseType), this.DatabaseType);
+            }
+            set
+            {
+                DatabaseType choice;
+                if(Enum.TryParse(value, out choice))
+                {
+                    DatabaseType = choice;
+                }
+            }
+        }
+
         #endregion
 
         #region Constructor
@@ -78,10 +94,15 @@ namespace NoSqlLogReader.ViewModels
         {
             var enumNames = Enum.GetNames(typeof(DatabaseType));
             EnumDatabaseType = enumNames;
-            databaseType = DatabaseType.JsonFileRepository;
+            DatabaseType = DatabaseType.JsonFileRepository;
+
+
+            this.LoadPreviousCredentials();
         }
 
         #endregion
+
+        #region Public Methods
 
         public bool Connect()
         {
@@ -111,6 +132,52 @@ namespace NoSqlLogReader.ViewModels
             return true;
         }
 
+        #endregion
+
+        #region Private Methods
+
+        /// <summary>
+        /// This method loads previous connection informations
+        /// </summary>
+        private void LoadPreviousCredentials()
+        {
+            IMvxFileStore fileStore = Mvx.Resolve<IMvxFileStore>();
+            if (fileStore.Exists(@"./NoSqlRepositories/Logger.Viewer/config.json"))
+            {
+                string content;
+
+                if (fileStore.TryReadTextFile(@"./NoSqlRepositories/Logger.Viewer/config.json", out content))
+                {
+                    Credentials credentials = JsonConvert.DeserializeObject<Credentials>(content);
+                    this.DatabaseName = credentials.DatabaseName;
+                    this.ConnectionUrl = credentials.DatabasePath;
+                    this.DatabaseType = credentials.DatabaseType;
+                }
+                
+            }
+        }
+
+        /// <summary>
+        /// Saves the current connection informations
+        /// </summary>
+        private void SaveCurentCredentials()
+        {
+            IMvxFileStore fileStore = Mvx.Resolve<IMvxFileStore>();
+            if (fileStore.Exists(@"./NoSqlRepositories/Logger.Viewer/config.json"))
+            {
+                fileStore.DeleteFile(@"./NoSqlRepositories/Logger.Viewer/config.json");
+            }
+
+            Credentials credentials = new Credentials();
+            credentials.DatabaseName = this.DatabaseName;
+            credentials.DatabasePath = this.ConnectionUrl;
+            credentials.DatabaseType = this.DatabaseType;
+
+            fileStore.WriteFile(@"./NoSqlRepositories/Logger.Viewer/config.json", JsonConvert.SerializeObject(credentials, Formatting.Indented));
+        }
+
+        #endregion
+
         #region Commands
 
         public MvxCommand ConnectCommand
@@ -122,6 +189,7 @@ namespace NoSqlLogReader.ViewModels
                     if (Connect())
                     {
                         Mvx.Resolve<ILogFetcher>().CreateAttachmentsCopies();
+                        SaveCurentCredentials();
                     }
                 });
             }

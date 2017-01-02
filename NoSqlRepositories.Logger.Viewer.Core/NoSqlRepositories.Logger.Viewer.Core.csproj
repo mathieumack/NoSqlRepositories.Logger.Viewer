@@ -72,6 +72,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Attachment.cs" />
+    <Compile Include="Credentials.cs" />
     <Compile Include="DatabaseType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
