@@ -118,7 +118,12 @@ namespace NoSqlRepositories.Logger.Viewer.ViewModels
         {
             get
             {
-                return (contentLog==null?contentLog:HighlightJson(contentLog));
+                if (String.IsNullOrWhiteSpace(contentLog))
+                    return String.Empty;
+                else if (contentLog.Length < 25000)
+                    return (contentLog == null ? contentLog : HighlightJson(contentLog));
+                else
+                    return "<p style='color: blue'>Content too long</p>";
             }
             set
             {

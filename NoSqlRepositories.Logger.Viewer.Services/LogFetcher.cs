@@ -101,7 +101,6 @@ namespace NoSqlRepositories.Logger.Viewer.Core.Services
                 {
                     Stream stream = repo.GetAttachment(log.Id, attachmentName);
                     stream.Seek(0, SeekOrigin.Begin);
-                    StreamReader sr = new StreamReader(stream);
                     int b = stream.ReadByte();
                     Stream tempFile = fileStore.OpenWrite(tempDirPath + "/" + log.Id + "/" + attachmentName);
                     while (b != -1) {
