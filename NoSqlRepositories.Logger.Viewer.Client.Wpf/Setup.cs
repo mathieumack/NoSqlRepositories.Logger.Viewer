@@ -5,6 +5,8 @@ using MvvmCross.Core.ViewModels;
 using Autofac;
 using MvvmCross.Platform.IoC;
 using MvvX.Autofac.Extras;
+using System.Configuration;
+using System.Reflection;
 
 namespace NoSqlRepositories.Logger.Viewer.Client.Wpf
 {
@@ -20,7 +22,9 @@ namespace NoSqlRepositories.Logger.Viewer.Client.Wpf
 
         protected override IMvxApplication CreateApp()
         {
-            return new ViewModels.App(container);
+            return new ViewModels.App(container, 
+                ConfigurationManager.AppSettings["hockeyAppId"],
+                Assembly.GetExecutingAssembly().GetName().Version.ToString());
         }
 
         protected override IMvxIoCProvider CreateIocProvider()

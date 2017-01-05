@@ -12,6 +12,7 @@ using NoSqlRepositories.MvvX.JsonFiles.Pcl;
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using MvvX.Plugins.HockeyApp;
 
 namespace NoSqlLogReader.ViewModels
 {
@@ -25,10 +26,11 @@ namespace NoSqlLogReader.ViewModels
 
         private string databaseName;
 
+        private readonly IHockeyClient hockeyClient;
+
         #endregion
 
         #region Public Fields
-
 
         public string ConnectionUrl
         {
@@ -90,13 +92,17 @@ namespace NoSqlLogReader.ViewModels
 
         #region Constructor
 
-        public ConnectionViewModel(IMvxMessenger messenger, ILogFetcher logFetcher)
+        public ConnectionViewModel(IMvxMessenger messenger, 
+                                    ILogFetcher logFetcher,
+                                    IHockeyClient hockeyClient)
         {
             var enumNames = Enum.GetNames(typeof(DatabaseType));
             EnumDatabaseType = enumNames;
+
+            this.hockeyClient = hockeyClient;
+
             DatabaseType = DatabaseType.JsonFileRepository;
-
-
+            
             this.LoadPreviousCredentials();
         }
 
@@ -106,12 +112,19 @@ namespace NoSqlLogReader.ViewModels
 
         public bool Connect()
         {
+            var connectionResult = false;
             if(databaseType == DatabaseType.JsonFileRepository)
-                return ConnectJsonFile();
+                connectionResult = ConnectJsonFile();
             else if(databaseType == DatabaseType.CouchBaseLite)
-                return ConnectCBDatabase();
-            
-            return false;
+                connectionResult = ConnectCBDatabase();
+
+            var properties = new Dictionary<string, string>();
+            properties.Add("Success", connectionResult.ToString());
+            properties.Add("Type", databaseType.ToString());
+
+            hockeyClient.TrackEvent("Connection", properties);
+
+            return connectionResult;
         }
 
         public bool ConnectJsonFile()

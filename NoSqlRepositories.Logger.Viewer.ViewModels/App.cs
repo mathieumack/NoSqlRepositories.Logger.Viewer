@@ -5,17 +5,24 @@ using MvvX.Plugins.AssemblyFinder;
 using System.Linq;
 using NoSqlRepositories.Logger.Viewer.Services;
 using NoSqlRepositories.Logger.Viewer.Core.Services;
+using MvvX.Plugins.HockeyApp;
 
 namespace NoSqlRepositories.Logger.Viewer.ViewModels
 {
     public class App : MvxApplication
     {
+        private readonly string hockeyAppKeyId;
+        private readonly string applicationVersion;
+
         /// <summary>
         /// Constructeur
         /// </summary>
         /// <param name="container"></param>
-        public App(IContainer container)
+        public App(IContainer container, string hockeyAppKeyId, string applicationVersion)
         {
+            this.hockeyAppKeyId = hockeyAppKeyId;
+            this.applicationVersion = applicationVersion;
+
             RegisterComponents(container);
         }
 
@@ -34,6 +41,15 @@ namespace NoSqlRepositories.Logger.Viewer.ViewModels
             }
             
             builder.Update(container);
+
+            // Start hockeyApp configuration
+            var hockeyClient = Mvx.Resolve<IHockeyClient>();
+            if (!string.IsNullOrWhiteSpace(hockeyAppKeyId))
+                hockeyClient.Configure(hockeyAppKeyId, applicationVersion, true, true, true);
+            else
+                hockeyClient.Configure("na", applicationVersion, false, false, false);
+
+            hockeyClient.TrackEvent("Start application.");
 
             Mvx.RegisterSingleton<ILogFetcher>(new LogFetcher());
 
